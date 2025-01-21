@@ -1,0 +1,255 @@
+#LISTA AULA2
+#1)----------------------------------------
+"""
+def fatorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        resultado = 1
+        for i in range (2,n + 1):
+            resultado *= i
+        return resultado
+    
+numero = int(input("Digite um numero inteiro nao negativo: "))
+if numero < 0:
+    print("O numero deve ser nao negativo.")
+else:
+    print(f"O fatorial de {numero} eh {fatorial(numero)}")
+"""
+
+#2)----------------------------------------
+"""
+def calcular_numero_conta(n):
+
+    conta_formatada = f"{n:06d}"
+    
+    soma = sum(int(digito) for digito in conta_formatada)
+    
+    digito_verificador = soma % 10
+    
+    return f"{conta_formatada}-{digito_verificador}"
+
+n = 7314
+print(calcular_numero_conta(n))
+"""
+
+#3)----------------------------------------
+"""
+def conversor_unidades(valor, tipo, unidade_origem, unidade_destino):
+    match tipo:
+
+        case 'temperatura':
+            match (unidade_origem, unidade_destino):
+                case ('Celsius', 'Fahrenheit'):
+                    return (valor * 9/5) + 32
+                case ('Fahrenheit', 'Celsius'):
+                    return (valor - 32) * 5/9
+                case ('Celsius', 'Kelvin'):
+                    return valor + 273.15
+                case ('Kelvin', 'Celsius'):
+                    return valor - 273.15
+                case ('Fahrenheit', 'Kelvin'):
+                    return (valor - 32) * 5/9 + 273.15
+                case ('Kelvin', 'Fahrenheit'):
+                    return (valor - 273.15) * 9/5 + 32
+                case _:
+                    return "Conversao de temperatura invalida."
+
+        case 'distancia':
+            match (unidade_origem, unidade_destino):
+                case ('metros', 'quilometros'):
+                    return valor / 1000
+                case ('quilometros', 'metros'):
+                    return valor * 1000
+                case ('milhas', 'quilometros'):
+                    return valor * 1.60934
+                case ('quilometros', 'milhas'):
+                    return valor / 1.60934
+                case ('metros', 'milhas'):
+                    return valor / 1609.34
+                case ('milhas', 'metros'):
+                    return valor * 1609.34
+                case _:
+                    return "Conversao de distancia invalida."
+
+        case 'tempo':
+            match (unidade_origem, unidade_destino):
+                case ('segundos', 'minutos'):
+                    return valor / 60
+                case ('minutos', 'segundos'):
+                    return valor * 60
+                case ('minutos', 'horas'):
+                    return valor / 60
+                case ('horas', 'minutos'):
+                    return valor * 60
+                case ('segundos', 'horas'):
+                    return valor / 3600
+                case ('horas', 'segundos'):
+                    return valor * 3600
+                case _:
+                    return "Conversao de tempo invalida."
+
+        case _:
+            return "Tipo de conversao invalido."
+
+valor = float(input("Digite um valor a ser convertido: "))
+tipo = input("Digite o tipo de conversao (temperatura, distancia, tempo): ").lower()
+unidade_origem = input("Digite a unidade de origem: ").capitalize()
+unidade_destino = input("Digite a unidade de destino: ").capitalize()
+
+resultado = conversor_unidades(valor, tipo, unidade_origem, unidade_destino)
+print(f"Resultado da conversao: {resultado}")
+"""
+
+#4)----------------------------------------
+"""
+def preco_por_grama(codigo_produto):
+    if 1 <= codigo_produto <= 4:
+        return 10
+    elif 5 <= codigo_produto <= 7:
+        return 25
+    elif 8 <= codigo_produto <= 10:
+        return 35
+    else:
+        return 0
+
+def calcular_imposto(codigo_pais):
+    if codigo_pais == 1:
+        return 0.0  
+    elif codigo_pais == 2:
+        return 0.15  
+    elif codigo_pais == 3:
+        return 0.25  
+    else:
+        return 0
+
+codigo_produto = int(input("Digite o codigo do produto: "))
+peso_kg = float(input("Digite o peso do produto em quilos: "))
+codigo_pais = int(input("Digite o codigo do pais de origem: "))
+
+peso_g = peso_kg * 1000
+
+preco_grama = preco_por_grama(codigo_produto)
+preco_total_produto = peso_g * preco_grama
+
+taxa_imposto = calcular_imposto(codigo_pais)
+valor_imposto = preco_total_produto * taxa_imposto
+
+valor_total = preco_total_produto + valor_imposto
+
+print(f"Peso do produto em gramas: {peso_g} g")
+print(f"Preço total do produto: R$ {preco_total_produto:.2f}")
+print(f"Valor do imposto: R$ {valor_imposto:.2f}")
+print(f"Valor total a ser pago: R$ {valor_total:.2f}")
+"""
+
+#5)----------------------------------------
+"""
+def criptografar(numero):
+    if len(numero) != 4 or not numero.isdigit():
+        return "Erro: O numero deve ter quatro digitos."
+
+    digitos = [(int(digito) + 7) % 10 for digito in numero]
+
+    digitos[0], digitos[2] = digitos[2], digitos[0]
+    digitos[1], digitos[3] = digitos[3], digitos[1]
+
+    return ''.join(map(str, digitos))
+
+
+def descriptografar(numero_criptografado):
+    if len(numero_criptografado) != 4 or not numero_criptografado.isdigit():
+        return "Erro: O numero deve ter quatro digitos."
+
+    digitos = [int(digito) for digito in numero_criptografado]
+
+    digitos[0], digitos[2] = digitos[2], digitos[0]
+    digitos[1], digitos[3] = digitos[3], digitos[1]
+
+    digitos = [(digito - 7 + 10) % 10 for digito in digitos]
+
+    return ''.join(map(str, digitos))
+
+numero = input("Digite um numero de quatro digitos para criptografar: ")
+numero_criptografado = criptografar(numero)
+print(f"Numero criptografado: {numero_criptografado}")
+
+numero_para_descriptografar = input("Digite um numero criptografado para descriptografar: ")
+numero_original = descriptografar(numero_para_descriptografar)
+print(f"Numero descriptografado: {numero_original}")
+"""
+
+#6)----------------------------------------
+"""
+def fatorial(num):
+    if num == 0 or num == 1:
+        return 1
+    else:
+        return num * fatorial(num - 1)
+
+def calcular_soma(N):
+    soma = 1
+    for i in range(2, N + 1):
+        soma += 1 / fatorial(i)
+    return soma
+
+N = int(input("Digite um valor inteiro e positivo para N: "))
+
+if N > 0:
+    resultado = calcular_soma(N)
+    print(f"A soma E eh: {resultado:.6f}")
+else:
+    print("O valor de N deve ser inteiro e positivo.")
+"""
+
+#7)----------------------------------------
+"""
+def fatorial(num):
+    if num == 0 or num == 1:
+        return 1
+    else:
+        return num * fatorial(num - 1)
+
+def calcular_cos(x, termos):
+    cos_x = 1  
+    sinal = -1
+    
+    for i in range(1, termos):
+        expoente = 2 * i 
+        termo = (x ** expoente) / fatorial(expoente)
+        cos_x += sinal * termo  
+        sinal *= -1 
+    
+    return cos_x
+
+x = float(input("Digite o valor de x (em radianos): "))
+termos = int(input("Digite o numero de termos para a serie de Taylor: "))
+
+resultado = calcular_cos(x, termos)
+
+print(f"O valor aproximado de cos({x}) usando {termos} termos eh: {resultado:.6f}")
+"""
+
+#8)----------------------------------------
+"""
+def raiz_babilonica(N, iteracoes):
+    k = 1.0  
+    valores_k = [] 
+    
+    for i in range(iteracoes):
+        k = (k + N / k) / 2  
+        valores_k.append(k)
+    
+    return valores_k
+
+N = float(input("Digite o valor de N (numero que deseja calcular a raiz quadrada): "))
+
+valores_calculados = raiz_babilonica(N, 12)
+
+print(f"Os primeiros 12 valores aproximados da raiz de {N} usando o metodo de Heron sao: ")
+for i, valor in enumerate(valores_calculados, start=1):
+    print(f"Iteração {i}: {valor:.6f}")
+
+raiz_real = N ** 0.5
+print(f"\nA raiz quadrada exata de {N} eh: {raiz_real:.6f}")
+"""
