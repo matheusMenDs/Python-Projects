@@ -1,0 +1,120 @@
+import csv
+from datetime import datetime
+
+agenda = {}
+
+def grava():
+    with open('agenda.csv', 'w', newline='') as arquivo_csv:
+        writer = csv.writer(arquivo_csv)
+        writer.writerow(["Nome", "Telefone", "Endereço", "Data de Aniversário", "Outras Informações"])
+        for contato, info in agenda.items():
+            writer.writerow([contato, info['telefone'], info['endereco'], info['aniversario'], info['outras_info']])
+
+def le():
+    try:
+        with open('agenda.csv', newline='') as arquivo_csv:
+            reader = csv.reader(arquivo_csv)
+            next(reader) 
+            for linha in reader:
+                if linha:
+                    agenda[linha[0]] = {
+                        'telefone': linha[1],
+                        'endereco': linha[2],
+                        'aniversario': linha[3],
+                        'outras_info': linha[4]
+                    }
+    except FileNotFoundError:
+        print("\nArquivo de agenda não encontrado. Um novo será criado.")
+
+def lista():
+    for i, (nome, info) in enumerate(agenda.items(), start=1):
+        print(f"\n{i}. {nome}  \nTelefone: {info['telefone']}, \nEndereço: {info['endereco']}, \nAniversário: {info['aniversario']}, \nOutras informações: {info['outras_info']}\n")
+
+def altera(nome, telefone, endereco, aniversario, outras_info):
+    if nome in agenda:
+        print("\nContato atualizado.")
+    else:
+        print("\nContato adicionado.")
+    agenda[nome] = {'telefone': telefone, 'endereco': endereco, 'aniversario': aniversario, 'outras_info': outras_info}
+
+def apaga(nome):
+    if nome in agenda:
+        del agenda[nome]
+        print(f"\nContato '{nome}' apagado.")
+    else:
+        print("\nContato não encontrado.")
+
+def verificarbirthday():
+    hoje = datetime.today().strftime('%d/%m')
+    aniversariantes = [nome for nome, info in agenda.items() if info['aniversario'][:5] == hoje]
+    if aniversariantes:
+        print("\nAniversariantes de hoje:\n")
+        for nome in aniversariantes:
+            print(nome)
+    else:
+        print("\nNenhum aniversariante hoje.")
+
+def ordenar():
+    global agenda
+    agenda = dict(sorted(agenda.items()))
+
+def menu():
+    while True:
+        print("\n----------------------------------------------------")
+        print("-------------| MENU AGENDA DE CONTATOS |------------")
+        print("----------------------------------------------------\n")
+        print(f"Tamanho da Agenda: [{len(agenda)} CONTATOS]\n")
+        print("----------------------------------------------------")
+        print("|1| --------------| Listar contatos |---------------")
+        print("----------------------------------------------------")
+        print("|2| ---------| Adicionar/Alterar contato |----------")
+        print("----------------------------------------------------")
+        print("|3| --------------| Apagar contato |----------------")
+        print("----------------------------------------------------")
+        print("|4| -----| Verificar aniversariantes de hoje |------")
+        print("----------------------------------------------------")
+        print("|5| -----------| Ordenar lista por nome |-----------")
+        print("----------------------------------------------------")
+        print("|6| ---------------| Salvar agenda |----------------")
+        print("----------------------------------------------------")
+        print("|7| --------------| Carregar agenda |---------------")
+        print("----------------------------------------------------")
+        print("|8| -------------------| Sair |---------------------")
+        print("----------------------------------------------------\n")
+        escolha = input("Escolha uma opção ---> ")
+
+        if escolha == '1':
+            lista()
+        elif escolha == '2':
+            nome = input("\nNome: ")
+            if nome in agenda:
+                print("\nErro: já existe um contato com esse nome.")
+            else:
+                telefone = input("Telefone: ")
+                endereco = input("Endereço: ")
+                aniversario = input("Data de aniversário (dd/mm/aaaa): ")
+                outras_info = input("Outras informações: ")
+                altera(nome, telefone, endereco, aniversario, outras_info)
+        elif escolha == '3':
+            nome = input("\nNome do contato a apagar: ")
+            apaga(nome)
+        elif escolha == '4':
+            verificarbirthday()
+        elif escolha == '5':
+            ordenar()
+            print("\nAgenda ordenada por nome.")
+        elif escolha == '6':
+            grava()
+            print("\nAgenda salva em arquivo.")
+        elif escolha == '7':
+            le()
+            print("\nAgenda carregada do arquivo.")
+        elif escolha == '8':
+            print("\nAgenda FECHADA...")
+            break
+        else:
+            print("\nOpção inválida. Tente novamente.")
+
+le()
+verificarbirthday()
+menu()
