@@ -1,0 +1,306 @@
+#FUNÇÕES
+#1)
+def retangulo(m, n):
+    for i in range(m):
+        print('*' * n)
+
+retangulo(4, 7)
+
+
+#2)
+def formatar_data(dia, mes, ano):
+    return f"{dia:02d}/{mes:02d}/{ano}"
+
+print(formatar_data(dia=15, mes=9, ano=2024))
+print(formatar_data(ano=2024, mes=9, dia=5))
+print(formatar_data(mes=12, dia=1, ano=2023))
+
+
+#3)
+def calcular_dv(cpf_parcial):
+    peso = len(cpf_parcial) + 1
+    soma = sum(int(digito) * peso for peso, digito in zip(range(peso, 1, -1), cpf_parcial))
+    resto = soma % 11
+    return 0 if resto < 2 else 11 - resto
+
+def cpf(n, d):
+    n = str(n)
+    d = str(d)
+    
+    if len(n) != 9 or len(d) != 2:
+        return False
+    
+    primeiro_digito = calcular_dv(n)
+    
+    segundo_digito = calcular_dv(n + str(primeiro_digito))
+    
+    return d == f"{primeiro_digito}{segundo_digito}"
+
+print(cpf(345702159, 71))
+
+
+#4)
+def soma(a, b):
+    return a + b
+
+def subtracao(a, b):
+    return a - b
+
+def multiplicacao(a, b):
+    return a * b
+
+def divisao(a, b):
+    return a / b if b != 0 else 'Erro: divisao por zero'
+
+def resto(a, b):
+    return a % b if b != 0 else 'Erro: divisao por zero'
+
+def potencia(a, b):
+    result = 1
+    for _ in range(abs(b)):
+        result *= a
+    return result if b >= 0 else 1 / result
+
+def raiz_quadrada(a):
+    return a ** 0.5 if a >= 0 else 'Erro: raiz de numero negativo'
+
+def fatorial(a):
+    if a == 0 or a == 1:
+        return 1
+    result = 1
+    for i in range(2, a + 1):
+        result *= i
+    return result
+
+def logaritmo(a, base=10):
+    if a <= 0 or base <= 0:
+        return 'Erro: logaritmo indefinido para valores <= 0'
+    n, term = 0, 1
+    while term >= 0.00001: 
+        term = (a - 1) / (a + 1)
+        n += 1
+    return term
+
+def seno(x, termos=10):
+    seno_x = 0
+    for n in range(termos):
+        coef = (-1) ** n
+        num = potencia(x, 2 * n + 1)
+        denom = fatorial(2 * n + 1)
+        seno_x += coef * (num / denom)
+    return seno_x
+
+def cosseno(x, termos=10):
+    cosseno_x = 0
+    for n in range(termos):
+        coef = (-1) ** n
+        num = potencia(x, 2 * n)
+        denom = fatorial(2 * n)
+        cosseno_x += coef * (num / denom)
+    return cosseno_x
+
+def tangente(x, termos=10):
+    return seno(x, termos) / cosseno(x, termos)
+
+def aplicar_operacao(funcao, a=None, b=None):
+    if b is not None:
+        return funcao(a, b)
+    elif a is not None:
+        return funcao(a)
+    else:
+        return 'Erro: nenhum numero fornecido'
+
+print(aplicar_operacao(soma, 5, 3))           
+print(aplicar_operacao(subtracao, 10, 4))      
+print(aplicar_operacao(multiplicacao, 6, 7))   
+print(aplicar_operacao(divisao, 10, 2))        
+print(aplicar_operacao(resto, 10, 3))         
+print(aplicar_operacao(potencia, 2, 3))
+print(aplicar_operacao(raiz_quadrada, 16))     
+print(aplicar_operacao(fatorial, 5))           
+print(aplicar_operacao(seno, 1))               
+print(aplicar_operacao(cosseno, 1))         
+print(aplicar_operacao(tangente, 1))
+
+
+#5)
+#a)
+def fatorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * fatorial(n - 1)
+
+fatorial(3)
+= 3 * fatorial(2)
+= 3 * (2 * fatorial(1))
+= 3 * (2 * (1 * fatorial(0)))
+= 3 * (2 * (1 * 1))
+= 3 * (2 * 1)
+= 3 * 2
+= 6
+
+fatorial(3)
+  -> fatorial(2)
+      -> fatorial(1)
+          -> fatorial(0)
+              <- retorna 1
+          <- retorna 1 * 1 = 1
+      <- retorna 2 * 1 = 2
+  <- retorna 3 * 2 = 6
+
+#b)
+def potencia(a, b):
+    if b == 0:
+        return 1
+    else:
+        return a * potencia(a, b - 1)
+
+potencia(2, 3)
+= 2 * potencia(2, 2)
+= 2 * (2 * potencia(2, 1))
+= 2 * (2 * (2 * potencia(2, 0)))
+= 2 * (2 * (2 * 1))
+= 2 * (2 * 2)
+= 2 * 4
+= 8
+
+potencia(2, 3)
+  -> potencia(2, 2)
+      -> potencia(2, 1)
+          -> potencia(2, 0)
+              <- retorna 1
+          <- retorna 2 * 1 = 2
+      <- retorna 2 * 2 = 4
+  <- retorna 2 * 4 = 8
+
+#c)
+def resto(a, b):
+    if a < b:
+        return a
+    else:
+        return resto(a - b, b)
+
+resto(10, 3)
+= resto(10 - 3, 3)
+= resto(7, 3)
+= resto(7 - 3, 3)
+= resto(4, 3)
+= resto(4 - 3, 3)
+= resto(1, 3)
+= 1
+
+resto(10, 3)
+  -> resto(7, 3)
+      -> resto(4, 3)
+          -> resto(1, 3)
+              <- retorna 1
+
+#d)
+def quociente(a, b):
+    if a < b:
+        return 0
+    else:
+        return 1 + quociente(a - b, b)
+
+quociente(10, 3)
+= 1 + quociente(10 - 3, 3)
+= 1 + quociente(7, 3)
+= 1 + (1 + quociente(7 - 3, 3))
+= 1 + (1 + (1 + quociente(4, 3)))
+= 1 + (1 + (1 + (1 + quociente(1, 3))))
+= 1 + (1 + (1 + (1 + 0)))
+= 4
+
+quociente(10, 3)
+  -> quociente(7, 3)
+      -> quociente(4, 3)
+          -> quociente(1, 3)
+              <- retorna 0
+          <- retorna 1
+      <- retorna 2
+  <- retorna 3
+<- retorna 4
+
+#e)
+def produto(a, b):
+    if b == 0:
+        return 0
+    else:
+        return a + produto(a, b - 1)
+
+produto(4, 3)
+= 4 + produto(4, 2)
+= 4 + (4 + produto(4, 1))
+= 4 + (4 + (4 + produto(4, 0)))
+= 4 + (4 + (4 + 0))
+= 4 + (4 + 4)
+= 4 + 8
+= 12
+
+produto(4, 3)
+  -> produto(4, 2)
+      -> produto(4, 1)
+          -> produto(4, 0)
+              <- retorna 0
+          <- retorna 4
+      <- retorna 8
+  <- retorna 12
+
+#f)
+def suc(n):
+    return n + 1
+
+def pred(n):
+    return n - 1 if n > 0 else 0
+
+def soma(a, b):
+    if b == 0:
+        return a
+    else:
+        return soma(suc(a), pred(b))
+
+soma(4, 3)
+= soma(suc(4), pred(3))
+= soma(5, 2)
+= soma(suc(5), pred(2))
+= soma(6, 1)
+= soma(suc(6), pred(1))
+= soma(7, 0)
+= 7
+
+soma(4, 3)
+  -> soma(5, 2)
+      -> soma(6, 1)
+          -> soma(7, 0)
+              <- retorna 7
+
+#6)
+def fibonacci(n):
+    if n == 1 or n == 2:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+n = 10 
+print(f"O {n}-esimo termo da serie de Fibonacci eh {fibonacci(n)}")
+
+
+#7)
+def calcular_estatisticas(*numeros):
+    if len(numeros) == 0:
+        return None, None, None 
+    
+    media = sum(numeros) / len(numeros)
+    valor_maximo = max(numeros)
+    valor_minimo = min(numeros)
+    
+    return media, valor_maximo, valor_minimo
+
+resultado1 = calcular_estatisticas(10, 20, 30, 40, 50)
+resultado2 = calcular_estatisticas(5, 1, 9, 3, 7)
+resultado3 = calcular_estatisticas(100, 200, 50, 25, 75)
+
+print(f"Resultado 1: Media = {resultado1[0]}, Maximo = {resultado1[1]}, Minimo = {resultado1[2]}")
+print(f"Resultado 2: Media = {resultado2[0]}, Maximo = {resultado2[1]}, Minimo = {resultado2[2]}")
+print(f"Resultado 3: Media = {resultado3[0]}, Maximo = {resultado3[1]}, Minimo = {resultado3[2]}")
