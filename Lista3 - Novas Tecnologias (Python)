@@ -1,0 +1,476 @@
+#1)--------------------
+"""
+lista = [12, -2, 4, 8, 29, 45, 78, 36, -17, 2, 12, 8, 3, 3, -52]
+
+#a)
+maior_elemento = max(lista)
+print(f"Maior elemento: {maior_elemento}")
+
+#b)
+menor_elemento = min(lista)
+print(f"Menor elemento: {menor_elemento}")
+
+#c)
+numeros_pares = [num for num in lista if num % 2 == 0]
+print(f"Numeros pares: {numeros_pares}")
+
+#d)
+primeiro_elemento = lista[0]
+ocorrencias_primeiro = lista.count(primeiro_elemento)
+print(f"Ocorrencias do primeiro elemento ({primeiro_elemento}): {ocorrencias_primeiro}")
+
+#e)
+media_elementos = sum(lista) / len(lista)
+print(f"Media dos elementos: {media_elementos:.2f}")
+
+#f)
+soma_negativos = sum(num for num in lista if num < 0)
+print(f"Soma dos elementos negativos: {soma_negativos}")
+"""
+
+#2)--------------------
+"""
+import random
+
+def jogar_forca():
+    palavras = ['python', 'desafio', 'computador', 'jogo', 'tecnologia', 'programacao']
+    
+    palavra_secreta = random.choice(palavras)
+    letras_acertadas = ['_' for letra in palavra_secreta]
+    tentativas = 10
+    
+    print("Bem-vindo ao jogo da Forca!")
+    
+    while tentativas > 0 and '_' in letras_acertadas:
+        print(f"\nPalavra: {' '.join(letras_acertadas)}")
+        print(f"Tentativas restantes: {tentativas}")
+        
+        chute = input("Digite uma letra: ").lower()
+        
+        if chute in palavra_secreta:
+            for i, letra in enumerate(palavra_secreta):
+                if letra == chute:
+                    letras_acertadas[i] = letra
+            print(f"Bom trabalho! '{chute}' esta na palavra.")
+        else:
+            tentativas -= 1
+            print(f"Ops! '{chute}' nao esta na palavra.")
+    
+    if '_' not in letras_acertadas:
+        print(f"\nParabens! Voce acertou a palavra: {palavra_secreta}")
+    else:
+        print(f"\nVoce perdeu! A palavra era: {palavra_secreta}")
+
+jogar_forca()
+"""
+
+#3)--------------------
+"""
+def verifica_parenteses(expressao):
+    pilha = []
+    
+    for char in expressao:
+        if char == '(':  
+            pilha.append(char)
+        elif char == ')':
+            if len(pilha) > 0 and pilha[-1] == '(': 
+                pilha.pop()
+            else:
+                return "Erro! Parentese fechado sem correspondente aberto"
+    
+    if len(pilha) == 0:
+        return "OK! A expressao esta balanceada"
+    else:
+        return "Erro! Parenteses abertos sem fechamento"
+
+expressoes = ["(())", "()()(()())", "( ) )", "((()))", "())", "(()"]
+for expressao in expressoes:
+    resultado = verifica_parenteses(expressao)
+    print(f"Expressão: {expressao} -> {resultado}")
+"""
+
+#4)--------------------
+"""
+T = [-10, -8, 0, 1, 2, 5, -2, -4]
+
+menor_temperatura = min(T)
+maior_temperatura = max(T)
+
+media_temperatura = sum(T) / len(T)
+
+print(f"Menor temperatura: {menor_temperatura}°C")
+print(f"Maior temperatura: {maior_temperatura}°C")
+print(f"Temperatura media: {media_temperatura:.2f}°C")
+"""
+
+#5)--------------------
+"""
+V = [9, 8, 7, 12, 0, 13, 21]
+
+pares = []
+impares = []
+
+for num in V:
+    if num % 2 == 0:
+        pares.append(num)
+    else:
+        impares.append(num)
+
+print(f"Lista de numeros pares: {pares}")
+print(f"Lista de numeros impares: {impares}")
+"""
+
+#6)--------------------
+"""
+lugares_vagos = [10, 2, 1, 3, 0]
+
+while True:
+    sala = int(input("Digite o numero da sala (1 a 5) ou 0 para sair: "))
+    
+    if sala == 0:
+        print("Encerrando o programa.")
+        break
+    
+    if sala < 1 or sala > 5:
+        print("Numero de sala invalido. Tente novamente.")
+        continue
+    
+    lugares_solicitados = int(input(f"Quantos lugares deseja na sala {sala}? "))
+    
+    indice_sala = sala - 1
+    
+    if lugares_solicitados <= lugares_vagos[indice_sala]:
+        lugares_vagos[indice_sala] -= lugares_solicitados
+        print(f"Venda realizada! Restam {lugares_vagos[indice_sala]} lugares na sala {sala}.")
+    else:
+
+        print(f"Nao ha lugares suficientes disponiveis na sala {sala}. Restam apenas {lugares_vagos[indice_sala]} lugares.")
+"""
+
+#7)--------------------
+"""
+frase = input("Digite uma frase: ")
+
+contador = {}
+
+for char in frase:
+    if char in contador:
+        contador[char] += 1
+    else:
+        contador[char] = 1  
+
+print(contador)
+"""
+
+#8)--------------------
+"""
+lista1 = [1, 2, 3, 4, 5, 6]
+lista2 = [4, 5, 6, 7, 8, 9]
+
+conjunto1 = set(lista1)
+conjunto2 = set(lista2)
+
+comuns = conjunto1.intersection(conjunto2)
+print(f"Valores em comum nas duas listas: {comuns}")
+
+so_na_primeira = conjunto1.difference(conjunto2)
+print(f"Valores que so existem na primeira lista: {so_na_primeira}")
+
+so_na_segunda = conjunto2.difference(conjunto1)
+print(f"Valores que existem apenas na segunda lista: {so_na_segunda}")
+
+nao_repetidos = conjunto1.union(conjunto2)
+print(f"Elementos nao repetidos das duas listas: {nao_repetidos}")
+
+primeira_sem_repetidos = conjunto1.difference(conjunto2)
+print(f"A primeira lista sem os elementos repetidos na segunda: {primeira_sem_repetidos}")
+"""
+
+#9)--------------------
+"""
+versao_inicial = ['a', 'b', 'c', 'd', 'e']
+versao_atual = ['b', 'c', 'e', 'f', 'g']
+
+conjunto_inicial = set(versao_inicial)
+conjunto_atual = set(versao_atual)
+
+nao_mudaram = conjunto_inicial.intersection(conjunto_atual)
+print(f"Elementos que nao mudaram: {nao_mudaram}")
+
+novos_elementos = conjunto_atual.difference(conjunto_inicial)
+print(f"Novos elementos: {novos_elementos}")
+
+elementos_removidos = conjunto_inicial.difference(conjunto_atual)
+print(f"Elementos que foram removidos: {elementos_removidos}")
+"""
+
+#10)--------------------
+"""
+pessoa = {
+    "first_name": "Matheus",
+    "last_name": "Mendes",
+    "age": 22,
+    "city": "Brasilia"
+}
+
+print(f"Primeiro nome: {pessoa['first_name']}")
+print(f"Sobrenome: {pessoa['last_name']}")
+print(f"Idade: {pessoa['age']} anos")
+print(f"Cidade: {pessoa['city']}")
+"""
+
+#11)--------------------
+"""
+pessoa2 = {
+    "first_name": "Maria",
+    "last_name": "Oliveira",
+    "age": 25,
+    "city": "Rio de Janeiro"
+}
+
+pessoa3 = {
+    "first_name": "Philippe",
+    "last_name": "Coutinho",
+    "age": 28,
+    "city": "Sao Paulo"
+}
+
+people = [pessoa1, pessoa2, pessoa3]
+
+for pessoa in people:
+    print(f"\nPrimeiro nome: {pessoa['first_name']}")
+    print(f"Sobrenome: {pessoa['last_name']}")
+    print(f"Idade: {pessoa['age']} anos")
+    print(f"Cidade: {pessoa['city']}")
+"""
+
+#12)--------------------
+"""
+cachorro = {
+    "tipo": "Cachorro",
+    "nome": "Simba",
+    "dono": "Rafaella"
+}
+
+gato = {
+    "tipo": "Gato",
+    "nome": "Trinit",
+    "dono": "Matheus"
+}
+
+passaro = {
+    "tipo": "Pássaro",
+    "nome": "Pingo",
+    "dono": "Roberto"
+}
+
+peixe = {
+    "tipo": "Peixe",
+    "nome": "Nemo",
+    "dono": "Juliana"
+}
+
+pets = [cachorro, gato, passaro, peixe]
+
+for pet in pets:
+    print(f"\nTipo: {pet['tipo']}")
+    print(f"Nome: {pet['nome']}")
+    print(f"Dono: {pet['dono']}")
+"""
+
+#13)--------------------
+"""
+sandwich_orders = [
+    "Xburguer",
+    "Frango empanado",
+    "Duplo bacon",
+    "Vegetariano",
+    "Big Mac"
+]
+
+finished_sandwiches = []
+
+for sandwich in sandwich_orders:
+    print(f"Preparei seu sanduiche: {sandwich}.")  
+    finished_sandwiches.append(sandwich)
+
+print("\nOs seguintes sanduiches estao prontos:")
+for finished in finished_sandwiches:
+    print(f"- Sanduiche: {finished}")
+"""
+
+#14)--------------------
+"""
+def exibir_tabuleiro(tabuleiro):
+    for linha in tabuleiro:
+        print(" | ".join(linha))
+        print("-" * 9)
+
+def verificar_vitoria(tabuleiro):
+    for i in range(3):
+        if tabuleiro[i][0] == tabuleiro[i][1] == tabuleiro[i][2] != " ":
+            return True
+        if tabuleiro[0][i] == tabuleiro[1][i] == tabuleiro[2][i] != " ":
+            return True
+
+    if tabuleiro[0][0] == tabuleiro[1][1] == tabuleiro[2][2] != " ":
+        return True
+    if tabuleiro[0][2] == tabuleiro[1][1] == tabuleiro[2][0] != " ":
+        return True
+
+    return False
+
+def jogo_da_velha():
+    tabuleiro = [[" " for _ in range(3)] for _ in range(3)]
+    jogador_atual = "X"
+
+    for jogada in range(9):
+        exibir_tabuleiro(tabuleiro)
+        
+        while True:
+            try:
+                linha = int(input(f"Jogador {jogador_atual}, escolha a linha (0, 1, 2): "))
+                coluna = int(input(f"Jogador {jogador_atual}, escolha a coluna (0, 1, 2): "))
+                
+                if tabuleiro[linha][coluna] == " ":
+                    tabuleiro[linha][coluna] = jogador_atual
+                    break
+                else:
+                    print("Essa posicao ja esta ocupada! Tente novamente.")
+            except (ValueError, IndexError):
+                print("Entrada invalida! Por favor, insira numeros de 0 a 2.")
+
+        if verificar_vitoria(tabuleiro):
+            exibir_tabuleiro(tabuleiro)
+            print(f"Jogador {jogador_atual} venceu!")
+            return
+
+        jogador_atual = "O" if jogador_atual == "X" else "X"
+
+    exibir_tabuleiro(tabuleiro)
+    print("Empate!")
+
+jogo_da_velha()
+"""
+
+#15)--------------------
+"""
+import json
+
+agenda = []
+
+def grava():
+    with open("agenda.json", "w") as f:
+        json.dump(agenda, f)
+    print("Agenda salva com sucesso!")
+
+def le():
+    global agenda
+    try:
+        with open("agenda.json", "r") as f:
+            agenda = json.load(f)
+        print("Agenda carregada com sucesso!")
+    except FileNotFoundError:
+        print("Arquivo da agenda nao encontrado.")
+    except json.JSONDecodeError:
+        print("Erro ao decodificar o arquivo da agenda.")
+
+def lista():
+    if not agenda:
+        print("A agenda está vazia.")
+        return
+    print("\nContatos na agenda:")
+    for idx, contato in enumerate(agenda):
+        print(f"{idx + 1}: {contato['nome']} - {contato['telefone']}")
+
+def apaga():
+    nome = input("Digite o nome do contato que deseja remover: ")
+    global agenda
+    agenda = [contato for contato in agenda if contato['nome'].lower() != nome.lower()]
+    print("Contato removido com sucesso.")
+
+def altera():
+    nome = input("Digite o nome do contato que deseja alterar: ")
+    for contato in agenda:
+        if contato['nome'].lower() == nome.lower():
+            novo_nome = input("Digite o novo nome: ")
+            novo_telefone = input("Digite o novo telefone: ")
+            aniversario = input("Digite a data de aniversario (DD/MM): ")
+            email = input("Digite o email: ")
+            tipo_telefone = input("Digite o tipo de telefone (celular, fixo, residencia, trabalho): ")
+            contato.update({
+                "nome": novo_nome,
+                "telefone": novo_telefone,
+                "aniversario": aniversario,
+                "email": email,
+                "tipo_telefone": tipo_telefone
+            })
+            print("Contato alterado com sucesso.")
+            return
+    print("Contato nao encontrado.")
+
+def menu():
+    while True:
+        print("\n--- Agenda ---")
+        print(f"Tamanho da agenda: {len(agenda)}")
+        print("1. Adicionar contato")
+        print("2. Listar contatos")
+        print("3. Alterar contato")
+        print("4. Remover contato")
+        print("5. Gravar agenda")
+        print("6. Ler agenda")
+        print("7. Ordenar contatos por nome")
+        print("8. Sair")
+
+        opcao = input("Escolha uma opcao: ")
+        
+        if opcao == "1":
+            adicionar_contato()
+        elif opcao == "2":
+            lista()
+        elif opcao == "3":
+            altera()
+        elif opcao == "4":
+            apaga()
+        elif opcao == "5":
+            grava()
+        elif opcao == "6":
+            le()
+        elif opcao == "7":
+            ordenar_por_nome()
+        elif opcao == "8":
+            print("Saindo...")
+            break
+        else:
+            print("Opção invalida, tente novamente.")
+
+def adicionar_contato():
+    nome = input("Digite o nome do contato: ")
+    
+    if any(contato['nome'].lower() == nome.lower() for contato in agenda):
+        print("Erro: Ja existe um contato com esse nome.")
+        return
+
+    telefone = input("Digite o telefone: ")
+    aniversario = input("Digite a data de aniversario (DD/MM): ")
+    email = input("Digite o email: ")
+    tipo_telefone = input("Digite o tipo de telefone (celular, fixo, residencia, trabalho): ")
+
+    agenda.append({
+        "nome": nome,
+        "telefone": telefone,
+        "aniversario": aniversario,
+        "email": email,
+        "tipo_telefone": tipo_telefone
+    })
+    print("Contato adicionado com sucesso.")
+
+def ordenar_por_nome():
+    global agenda
+    agenda.sort(key=lambda contato: contato['nome'])
+    print("Agenda ordenada por nome com sucesso.")
+
+if __name__ == "__main__":
+    le()  
+    menu()
+"""
