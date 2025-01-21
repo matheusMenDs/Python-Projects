@@ -16,7 +16,7 @@ class DatabaseManager:
         return mysql.connector.connect(**self.config)
 
     def create_table(self):
-        """Cria a tabela de usuários, caso não exista."""
+        """Cria a tabela de usuários, caso ela não exista."""
         cursor = self.connection.cursor()
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
