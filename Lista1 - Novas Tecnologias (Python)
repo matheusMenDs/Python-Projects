@@ -1,0 +1,144 @@
+#1)----------------------------------------
+"""
+numero1 = int(input("Insira um numero inteiro: "))
+numero2 = int(input("Insira mais um numero inteiro: "))
+
+soma = numero1 + numero2
+produto = numero1 * numero2
+diferenca = numero1 - numero2
+divisao = numero1 / numero2 
+
+print(f"Soma: {soma}")
+print(f"Produto: {produto}")
+print(f"Diferenca: {diferenca}")
+print(f"Divisao: {divisao}")
+"""
+
+#2)----------------------------------------
+"""
+print(""" """)
+					
+def desenhar_caixa():
+    print("**********")
+    print("*        *")
+    print("*        *")
+    print("*        *")
+    print("*        *")
+    print("**********")
+
+def desenhar_oval():
+    print("   ***   ")
+    print(" *     * ")
+    print("*       *")
+    print("*       *")
+    print(" *     * ")
+    print("   ***   ")
+
+def desenhar_seta():
+    print("    *    ")
+    print("   ***   ")
+    print("  *****  ")
+    print("    *    ")
+    print("    *    ")
+    print("    *    ")
+    print("    *    ")
+
+def desenhar_losango():
+    print("    *    ")
+    print("   * *   ")
+    print("  *   *  ")
+    print(" *     * ")
+    print("  *   *  ")
+    print("   * *   ")
+    print("    *    ")
+
+print("Caixa:")
+desenhar_caixa()
+
+print("\nOval:")
+desenhar_oval()
+
+print("\nSeta:")
+desenhar_seta()
+
+print("\nLosango:")
+desenhar_losango()
+"""
+
+#3)----------------------------------------
+"""
+numero = int(input("Insira um numero inteiro: "))
+
+
+if numero % 2 == 0:
+    print(f"O numero: {numero} eh par!")
+else:
+    print(f"O numero: {numero} eh impar!")
+
+"""
+
+#4)----------------------------------------
+"""
+numero = (input("Insira um numero inteiro de 5 digitos: "))
+
+for digito in numero:
+    print(digito, end="   ")
+
+"""
+
+#5)----------------------------------------
+"""
+import math
+
+a = float(input("Insira o coeficiente a: "))
+b = float(input("Insira o coeficiente b: "))
+c = float(input("Insira o coeficiente c: "))
+
+delta = b**2 - 4*a*c
+
+if delta > 0:
+    x1 = (-b + math.sqrt(delta)) / (2 * a)
+    x2 = (-b - math.sqrt(delta)) / (2 * a)
+    print(f"As raizes da equacao sao x' = {x1} e x'' = {x2}")
+elif delta == 0:
+    x = -b / (2 * a)
+    print(f"A equacao tem uma raiz real dupla: x' = x'' = {x}")
+else:
+    parte_real = -b / (2 * a)
+    parte_imaginaria = math.sqrt(-delta) / (2 * a)
+    print(f"As raizes da equacao sao complexas:\nx' = {parte_real} + {parte_imaginaria}i e x'' = {parte_real} - {parte_imaginaria}i")
+"""
+
+#6)----------------------------------------
+"""
+total_segundos = int(input("Insira os segundos: "))
+
+dias = total_segundos // 86400
+segundos_restantes = total_segundos % 86400
+
+horas = segundos_restantes // 3600
+segundos_restantes = segundos_restantes % 3600
+
+minutos = segundos_restantes // 60
+
+segundos = segundos_restantes % 60
+
+print(f"{dias} Dias, {horas} Horas, {minutos} Minutos e {segundos} Segundos")
+"""
+
+#7)----------------------------------------
+"""
+celsius = float(input("Insira a temperatura(°C): "))
+
+fahrenheit = (9/5) * celsius + 32
+
+print(f"A temperatura em °F eh: {fahrenheit}")
+"""
+
+
+
+
+
+
+
+
